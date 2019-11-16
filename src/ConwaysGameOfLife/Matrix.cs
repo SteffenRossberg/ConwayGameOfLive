@@ -37,8 +37,7 @@ namespace ConwaysGameOfLife
                 .Select(cell => (cell, isAliveInNextGeneration: cell.IsAliveInNextGeneration()))
                 .Where(entry => entry.cell.IsAlive != entry.isAliveInNextGeneration)
                 .ToList()
-                .AsParallel()
-                .ForAll(entry => entry.cell.IsAlive = entry.isAliveInNextGeneration);
+                .ForEach(entry => entry.cell.IsAlive = entry.isAliveInNextGeneration);
 
         public IEnumerable<(int row, int column)> GetAllLivingCells()
             => GetCells().Where(cell => IsAlive(cell.row, cell.column));
