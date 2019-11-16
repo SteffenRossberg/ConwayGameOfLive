@@ -24,6 +24,7 @@ namespace ConwaysGameOfLife
             var token = _cancellationTokenSource.Token;
             _gameLoopTask = Task.Run(() =>
             {
+                Console.CursorVisible = false;
                 InitNewGame();
                 while (!token.IsCancellationRequested)
                 {
@@ -37,12 +38,14 @@ namespace ConwaysGameOfLife
         {
             _cancellationTokenSource.Cancel();
             _gameLoopTask.Wait();
+            Console.CursorVisible = true;
+            Console.Clear();
         }
 
         private void InitNewGame()
         {
-            var rows = 50;
-            var columns = 100;
+            var rows = 40;
+            var columns = 40;
             var random = new Random();
             _matrix = new Matrix(rows, columns);
             _matrix.Load(Enumerable.Range(0, (int)(rows * columns * 0.7)).Select(index => (random.Next(0, rows), random.Next(0, columns))));
