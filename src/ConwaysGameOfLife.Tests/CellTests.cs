@@ -38,10 +38,17 @@ namespace ConwaysGameOfLife.Tests
         }
 
         [Test]
-        public void CellIsAliveWhenNeighborsCountIsEqualTo2Or3()
+        public void CellIsAliveWhenNeighborsCountIsEqualTo2AndIsAlive()
         {
             Assert.That(new Cell(() => 2, true).IsAliveInNextGeneration(), Is.True);
+            Assert.That(new Cell(() => 2, false).IsAliveInNextGeneration(), Is.False);
+        }
+
+        [Test]
+        public void CellIsAliveWhenNeighborsCountIsEqualTo3()
+        {
             Assert.That(new Cell(() => 3, true).IsAliveInNextGeneration(), Is.True);
+            Assert.That(new Cell(() => 3, false).IsAliveInNextGeneration(), Is.True);
         }
         
         [Test]
